@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanga Mini Ilova</title>
+    <style>
+        body {
+            background-color: #0f001f;
+            color: white;
+            font-family: 'Arial';
+            text-align: center;
+        }
+        .balance {
+            font-size: 28px;
+            margin: 20px;
+        }
+        .btn {
+            background: #ffb703;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>🪙 Tanga mini ilova</h1>
+    <div class="balance">Balans: <span id="balance">0</span></div>
+    <button class="btn" onclick="earn()">Tanga yig‘ish</button>
+
+    <script>
+        let balance = 0;
+        function earn() {
+            balance += 10;
+            document.getElementById('balance').textContent = balance;
+        }
+    </script>
+</body>
+</html>
