@@ -4,38 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tanga Mini Ilova</title>
-    <style>
-        body {
-            background-color: #0f001f;
-            color: white;
-            font-family: 'Arial';
-            text-align: center;
-        }
-        .balance {
-            font-size: 28px;
-            margin: 20px;
-        }
-        .btn {
-            background: #ffb703;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>🪙 Tanga mini ilova</h1>
-    <div class="balance">Balans: <span id="balance">0</span></div>
-    <button class="btn" onclick="earn()">Tanga yig‘ish</button>
 
-    <script>
-        let balance = 0;
-        function earn() {
-            balance += 10;
-            document.getElementById('balance').textContent = balance;
-        }
-    </script>
+<div class="app">
+    <header>
+        <h1>🪙 Tanga</h1>
+        <p id="user_id"></p>
+    </header>
+
+    <section class="balance">
+        <h2>Umumiy balans</h2>
+        <p id="balance">0</p>
+    </section>
+
+    <div class="buttons">
+        <button onclick="addCoins()">+100 Tanga olish</button>
+        <button onclick="mine()">⛏ Mayning</button>
+    </div>
+
+    <footer>
+        <p>© 2025 Tanga Mini Ilova</p>
+    </footer>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
