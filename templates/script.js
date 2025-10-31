@@ -23,3 +23,4 @@ function mine() {
 }
 
 loadUser();
+console.log("Tanga mini ilova yuklandi ✅");
