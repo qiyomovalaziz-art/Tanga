@@ -39,7 +39,7 @@ def start(message):
         "👇 Quyidagi tugma orqali kirish mumkin:",
         reply_markup=telebot.types.InlineKeyboardMarkup().add(
             telebot.types.InlineKeyboardButton(
-                "🪙 Ilovaga kirish", web_app=telebot.types.WebAppInfo(url="https://YOUR-RAILWAY-APP-NAME.up.railway.app")
+                "🪙 Ilovaga kirish", web_app=telebot.types.WebAppInfo(url="https://web-production-57765.up.railway.app/")
             )
         )
     )
