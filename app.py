@@ -1,44 +1,54 @@
-from flask import Flask, render_template, jsonify, request
+import telebot
 import json
+from flask import Flask, render_template, request
 import os
+
+BOT_TOKEN = "8493429830:AAE21OTeGn7uFmY0uwU-7olzRUAOANIVsQs"
+bot = telebot.TeleBot(BOT_TOKEN)
 
 app = Flask(__name__)
 
-DATA_FILE = "database.json"
-
+# 🔸 Oddiy foydalanuvchilar bazasi
 def load_data():
-    if not os.path.exists(DATA_FILE):
+    try:
+        with open("database.json", "r") as f:
+            return json.load(f)
+    except:
         return {}
-    with open(DATA_FILE, "r") as f:
-        return json.load(f)
 
 def save_data(data):
-    with open(DATA_FILE, "w") as f:
+    with open("database.json", "w") as f:
         json.dump(data, f, indent=2)
 
-@app.route("/")
+@app.route('/')
 def home():
-    return render_template("index.html")
+    return render_template('index.html')
 
-@app.route("/get_user/<user_id>")
-def get_user(user_id):
+# 🔸 Bot komandasi
+@bot.message_handler(commands=['start'])
+def start(message):
     data = load_data()
-    user = data.get(user_id, {"balance": 0, "referrals": 0, "stars": 0})
-    return jsonify(user)
-
-@app.route("/update_balance", methods=["POST"])
-def update_balance():
-    data = load_data()
-    info = request.get_json()
-    user_id = info["user_id"]
-    amount = info["amount"]
+    user_id = str(message.from_user.id)
 
     if user_id not in data:
-        data[user_id] = {"balance": 0, "referrals": 0, "stars": 0}
+        data[user_id] = {"balance": 0, "referrals": 0}
+        save_data(data)
 
-    data[user_id]["balance"] += amount
-    save_data(data)
-    return jsonify({"status": "success", "balance": data[user_id]["balance"]})
+    markup = telebot.types.InlineKeyboardMarkup()
+    markup.add(
+        telebot.types.InlineKeyboardButton(
+            "🪙 Ilovaga kirish", 
+            web_app=telebot.types.WebAppInfo(url="https://web-production-57765.up.railway.app/")
+        )
+    )
 
+    bot.send_message(
+        message.chat.id,
+        "👋 Salom! 'Tanga' mini ilovasiga xush kelibsiz!\n👇 Quyidagi tugma orqali kirish mumkin:",
+        reply_markup=markup
+    )
+
+# 🔹 Flask ilovasini ishga tushurish
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
