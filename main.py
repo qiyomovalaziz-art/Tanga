@@ -2,7 +2,7 @@ import telebot
 import json
 from flask import Flask, render_template, request
 
-BOT_TOKEN = "BU_YERGA_TOKEN_KIRIT"
+BOT_TOKEN = "8493429830:AAE21OTeGn7uFmY0uwU-7olzRUAOANIVsQs"
 bot = telebot.TeleBot(BOT_TOKEN)
 
 app = Flask(__name__)
