@@ -1,13 +1,10 @@
 import telebot
 import json
-from flask import Flask, render_template, request
-import os
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+BOT_TOKEN = "8493429830:AAE21OTeGn7uFmY0uwU-7olzRUAOANIVsQs"
 bot = telebot.TeleBot(BOT_TOKEN)
 
-app = Flask(__name__)
-
+# Oddiy bazani yuklash/saqlash
 def load_data():
     try:
         with open("database.json", "r") as f:
@@ -18,10 +15,6 @@ def load_data():
 def save_data(data):
     with open("database.json", "w") as f:
         json.dump(data, f, indent=2)
-
-@app.route('/')
-def home():
-    return render_template('index.html')
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -40,11 +33,10 @@ def start(message):
         )
     )
 
-    bot.send_message(
-        message.chat.id,
-        "👋 Salom! 'Tanga' mini ilovasiga xush kelibsiz!\n👇 Quyidagi tugma orqali kirish mumkin:",
+    bot.send_message(message.chat.id,
+        "👋 Salom! 'Tanga' mini ilovasiga xush kelibsiz!\n"
+        "👇 Quyidagi tugma orqali kirish mumkin:",
         reply_markup=markup
     )
 
-if __name__ == "__main__":
-    bot.infinity_polling()
+bot.polling(non_stop=True)
