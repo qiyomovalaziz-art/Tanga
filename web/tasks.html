@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📋 Vazifalar</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div class="header">📋 Vazifalar</div>
+  <div class="container">
+    <p>Vazifalarni bajaring va mukofot oling!</p>
+    <div class="task">
+      <p>📢 Telegram kanalga obuna bo‘ling — +0.01 ₽</p>
+      <button onclick="claim(1)">✅ Bajarildi</button>
+    </div>
+    <div class="task">
+      <p>⭐ Do‘stni taklif qiling — +0.02 ₽</p>
+      <button onclick="claim(2)">✅ Bajarildi</button>
+    </div>
+  </div>
+
+  <div class="nav">
+    <a href="index.html">🏠</a>
+    <a href="boost.html">⚡</a>
+    <a href="tasks.html">📋</a>
+    <a href="referrals.html">👥</a>
+    <a href="pay.html">💸</a>
+  </div>
+
+  <script>
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+    function claim(id) {
+      tg.showAlert(`🎉 Vazifa #${id} uchun mukofot qo‘shildi!`);
+    }
+  </script>
+</body>
+</html>
