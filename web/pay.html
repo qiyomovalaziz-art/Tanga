@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💸 To‘lash</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div class="header">💸 To‘lash</div>
+  <div class="container">
+    <p>Hisobingizdan pul yechish uchun ma'lumot kiriting:</p>
+    <input type="text" id="wallet" placeholder="To‘lov manzili (Qiwi / Kartangiz)" />
+    <input type="number" id="sum" placeholder="Miqdor (₽)" />
+    <button id="pay">✅ Yuborish</button>
+  </div>
+
+  <div class="nav">
+    <a href="index.html">🏠</a>
+    <a href="boost.html">⚡</a>
+    <a href="tasks.html">📋</a>
+    <a href="referrals.html">👥</a>
+    <a href="pay.html">💸</a>
+  </div>
+
+  <script>
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+    document.getElementById("pay").addEventListener("click", () => {
+      const wallet = document.getElementById("wallet").value;
+      const sum = document.getElementById("sum").value;
+      if (!wallet || !sum) {
+        tg.showAlert("⚠️ Barcha maydonlarni to‘ldiring!");
+        return;
+      }
+      tg.showAlert(`✅ ${sum} ₽ miqdorida so‘rov yuborildi. Yaqinda to‘lanadi!`);
+    });
+  </script>
+</body>
+</html>
