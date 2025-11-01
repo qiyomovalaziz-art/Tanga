@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>👥 Referallar</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div class="header">👥 Referallar</div>
+  <div class="container">
+    <p>Do‘stlaringizni taklif qiling va har biri uchun mukofot oling!</p>
+    <p>🔗 Sizning havolangiz:</p>
+    <input type="text" id="refLink" readonly />
+    <p id="refCount">Referallar: 0 ta</p>
+  </div>
+
+  <div class="nav">
+    <a href="index.html">🏠</a>
+    <a href="boost.html">⚡</a>
+    <a href="tasks.html">📋</a>
+    <a href="referrals.html">👥</a>
+    <a href="pay.html">💸</a>
+  </div>
+
+  <script>
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+    const user = tg.initDataUnsafe?.user;
+    const user_id = user?.id || Math.floor(Math.random() * 1000000);
+
+    const refLink = `https://t.me/Rubil_Curupto_bot?start=${user_id}`;
+    document.getElementById("refLink").value = refLink;
+
+    fetch(`/api/referrals/${user_id}`)
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById("refCount").innerText = `Referallar: ${data.referrals} ta`;
+      });
+  </script>
+</body>
+</html>
